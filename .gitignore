@@ -1,0 +1,14 @@
+/176-780/
+/Data/*
+/html/*
+*.fig
+*.tif
+*.xls
+*.csv
+*.log
+/slprj/*
+/hdlsrc/*
+*.txt
+*.mexw64
+*.exe
+*.slx
