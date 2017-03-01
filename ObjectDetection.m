@@ -81,7 +81,7 @@ function btn_loadData_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global oriIMArr;
 
-%ÊäÈëÔ­Ê¼ĞòÁĞÍ¼Ïñ£¬²¢½«Í¼Ïñ¸³Óèµ±Ç°ĞòÁĞÍ¼Ïñ±äÁ¿----------------------------
+%è¾“å…¥åŸå§‹åºåˆ—å›¾åƒï¼Œå¹¶å°†å›¾åƒèµ‹äºˆå½“å‰åºåˆ—å›¾åƒå˜é‡----------------------------
 [FileName,PathName] = uigetfile({'*.*','All Files(*.*)'},'Input Aperture Data','MultiSelect','on');
 [m n]=size(FileName);
 if n==5
@@ -113,17 +113,17 @@ global curIMArr;
 global MedianValFrame;
 global StarPosi;
 
-alpha=str2num(get(handles.edt_viewCof,'string'));%¶ÁÈ¡ÏÔÊ¾Ëõ·Å±ÈÀıÒò×Ó
+alpha=str2num(get(handles.edt_viewCof,'string'));%è¯»å–æ˜¾ç¤ºç¼©æ”¾æ¯”ä¾‹å› å­
 curIMArr=oriIMArr;
-%Ô¤´¦Àí********************************************************************
-%È¥³ı±³¾°
+%é¢„å¤„ç†********************************************************************
+%å»é™¤èƒŒæ™¯
 for ii=1:5 
   [fout,Background]=fun_IterBackgroundRremove(curIMArr(:,:,ii),11);
   %[fout,bg]=fun_THBackgroundRremove(curIMArr(:,:,ii));
   curIMArr(:,:,ii)=abs(fout);        
 end 
   curIMArrBak=curIMArr;
-%Í¼ÏñÅä×¼£¨ÒÔµÚÒ»Ö¡Í¼ÏñÎª»ù×¼£©*********************************************
+%å›¾åƒé…å‡†ï¼ˆä»¥ç¬¬ä¸€å¸§å›¾åƒä¸ºåŸºå‡†ï¼‰*********************************************
 frameOffset=zeros(5,2);
 for ii=2:5
   [Rx Ry]=fun_PCRegistration(curIMArr(385:640,385:640,1),curIMArr(385:640,385:640,ii));
@@ -142,13 +142,13 @@ for ii=2:5
     curIMArr(1024-Rx+1:1024,:,ii)=0; 
   end      
 end
-%ºãĞÇ¼ì²â******************************************************************
-% MedianValFrame=median(curIMArr(:,:,1:5),3);%ÖĞÖµÍ¶Ó°Ö¡ÌáÈ¡
+%æ’æ˜Ÿæ£€æµ‹******************************************************************
+% MedianValFrame=median(curIMArr(:,:,1:5),3);%ä¸­å€¼æŠ•å½±å¸§æå–
 % % tempIM=MedianValFrame;
 % % minV=min(tempIM(:));maxV=max(tempIM(:));
 % % h=figure();imagesc(tempIM,[minV,minV+alpha*(maxV-minV)]);colormap(gray);axis('off'); 
 % 
-% T=150;%ÈË¹¤Éè¶¨¶şÖµ»¯ãĞÖµ£¬ÏŞ¶¨ºãĞÇÁÁ¶È
+% T=150;%äººå·¥è®¾å®šäºŒå€¼åŒ–é˜ˆå€¼ï¼Œé™å®šæ’æ˜Ÿäº®åº¦
 % medfBW=MedianValFrame;
 % medfBW(medfBW<=T)=0;
 % medfBW(medfBW>T)=1;
@@ -175,7 +175,7 @@ end
 % StarPosi(:,2) =StarPosi(:,2)./StarPosi(:,3);
 % StarPosi=round(StarPosi(:,1:2));
 % 
-% %Çå³ıÎ»ÓÚ±ß½çµÄºãĞÇ---------------------------------------------------------
+% %æ¸…é™¤ä½äºè¾¹ç•Œçš„æ’æ˜Ÿ---------------------------------------------------------
 % tempTable=StarPosi(:,1:2)*0;
 % tempNum=0;
 % for ii=1:RegionNum
@@ -186,14 +186,14 @@ end
 % end
 % StarPosi=tempTable(1:tempNum,:);
 % starNUM=tempNum;
-% %ÏÔÊ¾³õ²½ºãĞÇ¼ì²â½á¹û,ÏñËØ¼¶¾«¶È-------------------------------------------
+% %æ˜¾ç¤ºåˆæ­¥æ’æ˜Ÿæ£€æµ‹ç»“æœ,åƒç´ çº§ç²¾åº¦-------------------------------------------
 % tempIM=MedianValFrame;
 % minV=min(tempIM(:));maxV=max(tempIM(:));
-% h=figure('Name','ÖĞÖµÖ¡-ºãĞÇÏñËØ¼¶¼ì²â½á¹û');imagesc(tempIM,[minV,minV+alpha*(maxV-minV)]);colormap(gray);axis('off'); 
+% h=figure('Name','ä¸­å€¼å¸§-æ’æ˜Ÿåƒç´ çº§æ£€æµ‹ç»“æœ');imagesc(tempIM,[minV,minV+alpha*(maxV-minV)]);colormap(gray);axis('off'); 
 % hold on
 % plot(StarPosi(:,2),StarPosi(:,1),'r*');
 
-%Ä¿±ê¼ì²â******************************************************************
+%ç›®æ ‡æ£€æµ‹******************************************************************
 [MaxValFrame MaxIndexFrame]=max(curIMArr(:,:,1:5),[],3);
 MedianValFrame=median(curIMArr(:,:,1:5),3);
 % h=figure();imagesc(MaxIndexFrame);colormap(jet);axis('off');
@@ -226,7 +226,7 @@ CorMaxIndexFrame=fun_MaxIndexFrameClear(norIndexFrame);
  mask(mask>0)=1;
  testIM=mask.*MaxValFrame;
 %  h=figure();imagesc(testIM);colormap(gray);axis('off');
-%  ¼ì²âÔË¶¯Ä¿±ê£¬²¢ÔÚ×î´óÖµÖ¡ÉÏÏÔÊ¾³õ²½¼ì²â½á¹û,ÏñËØ¼¶¾«¶È-------------------
+%  æ£€æµ‹è¿åŠ¨ç›®æ ‡ï¼Œå¹¶åœ¨æœ€å¤§å€¼å¸§ä¸Šæ˜¾ç¤ºåˆæ­¥æ£€æµ‹ç»“æœ,åƒç´ çº§ç²¾åº¦-------------------
 objPosi=fun_MoveObjectDetectDP(CorMaxIndexFrame,MaxValFrame);
 objPosiINT=round(objPosi);
 %---------------------------------------------------------
@@ -257,18 +257,18 @@ end
 %---------------------------------------------------------
 tempIM=MaxValFrame;
 minV=min(tempIM(:));maxV=max(tempIM(:));
-h=figure('Name','×î´óÖµÖ¡-ÔË¶¯Ä¿±êÏñËØ¼¶¼ì²â½á¹û');imagesc(tempIM,[minV,minV+alpha*(maxV-minV)]);colormap(gray);axis('off');
+h=figure('Name','æœ€å¤§å€¼å¸§-è¿åŠ¨ç›®æ ‡åƒç´ çº§æ£€æµ‹ç»“æœ');imagesc(tempIM,[minV,minV+alpha*(maxV-minV)]);colormap(gray);axis('off');
 hold on
 plot(objPosiINT(:,2),objPosiINT(:,1),'r*');
 
-%¼ÆËãÃ¿Ö¡Í¼ÏñÉÏÄ¿±ê¼°ºãĞÇµÄÑÇÏñÔªÎ»ÖÃ£¬²¢Êä³ö½á¹ûÊı¾İÄ¿±ê¼ì²â**************
-%¼ÆËãºãĞÇÑÇÏñËØ¾«È·Î»ÖÃ----------------------------------------------------
+%è®¡ç®—æ¯å¸§å›¾åƒä¸Šç›®æ ‡åŠæ’æ˜Ÿçš„äºšåƒå…ƒä½ç½®ï¼Œå¹¶è¾“å‡ºç»“æœæ•°æ®ç›®æ ‡æ£€æµ‹**************
+%è®¡ç®—æ’æ˜Ÿäºšåƒç´ ç²¾ç¡®ä½ç½®----------------------------------------------------
 % for ii=1:5
 %   curCutImArr=zeros(15,15,starNUM);
 %   curStarPosi=StarPosi;
 %   curStarPosi(:,1)=curStarPosi(:,1)-frameOffset(ii,1);
 %   curStarPosi(:,2)=curStarPosi(:,2)-frameOffset(ii,2);  
-%   for jj=1:starNUM   %ÌáÈ¡µ±Ç°Ö¡ºãĞÇÊı¾İ
+%   for jj=1:starNUM   %æå–å½“å‰å¸§æ’æ˜Ÿæ•°æ®
 %     curCutImArr(:,:,jj)=oriIMArr(curStarPosi(jj,1)-7:curStarPosi(jj,1)+7,curStarPosi(jj,2)-7:curStarPosi(jj,2)+7);
 %     [Rx Cy]=fun_CalCentriodSeedfilled(curCutImArr(:,:,jj));
 %     curStarPosi(jj,1)=curStarPosi(jj,1)-(8-Rx);
@@ -279,11 +279,11 @@ plot(objPosiINT(:,2),objPosiINT(:,1),'r*');
 % %   h=figure();imagesc(tempIM,[minV,minV+alpha*(maxV-minV)]);colormap(gray);axis('off'); 
 % %   hold on
 % %   plot(curStarPosi(:,2),curStarPosi(:,1),'y*');  
-%   str=strcat('ºãĞÇÎ»ÖÃ¼ì²â½á¹û',num2str(ii),'Ö¡.xls');
+%   str=strcat('æ’æ˜Ÿä½ç½®æ£€æµ‹ç»“æœ',num2str(ii),'å¸§.xls');
 %   xlswrite(str,curStarPosi);
 % end
 
-%¼ÆËãÄ¿±êµÄÑÇÏñËØ¾«È·Î»ÖÃ----------------------------------------------------
+%è®¡ç®—ç›®æ ‡çš„äºšåƒç´ ç²¾ç¡®ä½ç½®----------------------------------------------------
 [M N]=size(objPosi);
 objArr=zeros(15,15,M);
 %objArr=zeros(7,7,5);
@@ -321,7 +321,7 @@ for ii=1:M
   imwrite(uint16(objArr(:,:,ii)),str,'tif');  
   %h=figure();imagesc(objArr(:,:,ii));colormap(gray);axis('off');       
 end
-xlswrite('Ä¿±êÎ»ÖÃ¼ì²â½á¹û.xls',objCor);
+xlswrite('ç›®æ ‡ä½ç½®æ£€æµ‹ç»“æœ.xls',objCor);
 
 
 

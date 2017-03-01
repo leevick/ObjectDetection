@@ -1,8 +1,8 @@
-function [fout,Background]=fun_IterBackgroundRremove(fin,var)   %È¥³ı±³¾°
+function [fout,Background]=fun_IterBackgroundRremove(fin,var)   %å»é™¤èƒŒæ™¯
 
-[M N]=size(fin);                                %ÇóÏñ¸ß¡¢Ïñ¿í
-imL=fin(:,1:fix(N/2));                          %×ó°ë²¿·Ö
-imR=fin(:,fix(N/2)+1:end);                      %ÓÒ°ë²¿·Ö
+[M N]=size(fin);                                %æ±‚åƒé«˜ã€åƒå®½
+imL=fin(:,1:fix(N/2));                          %å·¦åŠéƒ¨åˆ†
+imR=fin(:,fix(N/2)+1:end);                      %å³åŠéƒ¨åˆ†
 %-------------------------------------------------------------------------
 %for ii=1:3
 for ii=1:4
